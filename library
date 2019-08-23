@@ -1,0 +1,104 @@
+#include<iostream>
+#include<string>
+#include"Header.h"
+using namespace std;
+
+class Library
+{
+private:
+	string NameOfBook;
+	string AuthorName;
+	double price;
+public:
+	void getDetails(string NameOfBook, string AuthorName, double price)
+	{
+		this->NameOfBook = NameOfBook;
+		this->AuthorName = AuthorName;
+		this->price = price;
+	}
+
+	string getNameofbook()
+	{
+		return NameOfBook;
+	}
+
+	string getAuthorname()
+	{
+		return AuthorName;
+	}
+
+	double getPrice()
+	{
+		return price;
+	}
+	void displayDetails()
+	{
+		cout << this->NameOfBook<<"\n";
+		cout << this->AuthorName << "\n";
+		cout << this->price << "\n";
+	}
+};
+
+Library* alllibrary;
+int num;
+
+
+void initialize()
+{
+	num = getInteger("How many books you want to enter ?");
+	alllibrary = new Library[num];
+}
+
+string getMenu() {
+	string menu = "~~~~~~~~~~~~~~~~LIBRARY MONITORING SYSTEM~~~~~~~\n";
+	menu += "TO ADD NEW BOOK-------->PRESS 1\n";
+	menu += "TO UPDATE BOOK--------->PRESS 2\n";
+	menu += "TO DELETE BOOK--------->PRESS 3\n";
+	menu += "TO DISPLAY ALL------------->PRESS 4\n";
+	menu += "PS: ANY OTHER KEY IS CONSIDERED AS EXIT................";
+	return menu;
+
+}
+
+
+void addNewBook(Library lib)
+{
+	for (int i = 0; i < num; i++)
+	{
+		if (alllibrary[i].getNameofbook() == "")
+		{
+			alllibrary[i].getDetails(lib.getNameofbook(), lib.getAuthorname(), lib.getPrice());
+			return;
+		}
+	}
+}
+
+bool processMenu(int choice) {
+	switch (choice) {
+	case 1:
+		addNewBook();
+		return true;
+	case 2:
+		return true;
+	case 3:
+		
+		return true;
+	case 4:
+		
+		return true;
+	default:
+		return false;
+	}
+}
+
+int main()
+{
+	Library lib;
+	string menu = getMenu();
+	initialize();
+	bool processing = true;
+	do {
+		int choice = getInteger(menu);
+		processing = processMenu(choice);
+	} while (processing);
+}
